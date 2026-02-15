@@ -212,22 +212,74 @@
         a:hover {
             text-decoration: underline;
         }
+
+        html {
+            scroll-behavior: smooth;
+        }
     </style>
+    <script>
+        function scrollToSection(sectionId) {
+            const element = document.getElementById(sectionId);
+            if (element) {
+                element.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                
+                // Update active tab
+                document.querySelectorAll('.tab').forEach(tab => {
+                    tab.classList.remove('active');
+                });
+                event.target.classList.add('active');
+            }
+        }
+
+        // Highlight active tab based on scroll position
+        window.addEventListener('scroll', function() {
+            const sections = ['home', 'news', 'intro', 'activities', 'join'];
+            const tabs = document.querySelectorAll('.tab');
+            
+            let currentSection = 'home';
+            
+            sections.forEach(sectionId => {
+                const element = document.getElementById(sectionId);
+                if (element) {
+                    const rect = element.getBoundingClientRect();
+                    if (rect.top <= 150 && rect.bottom >= 150) {
+                        currentSection = sectionId;
+                    }
+                }
+            });
+            
+            // Map section IDs to tab indices
+            const sectionToTab = {
+                'home': 0,
+                'intro': 1,
+                'activities': 2,
+                'news': 3,
+                'join': 4
+            };
+            
+            tabs.forEach((tab, index) => {
+                tab.classList.remove('active');
+                if (sectionToTab[currentSection] === index) {
+                    tab.classList.add('active');
+                }
+            });
+        });
+    </script>
 </head>
 <body>
     <div class="container">
-        <div class="header">
+        <div class="header" id="home">
             <div class="icon">🏃‍♀️</div>
             <h1>다시 뛰는 여성정치</h1>
             <div class="subtitle">더 나은 정치를 위한 여성들의 연대와 도전</div>
         </div>
 
         <div class="nav-tabs">
-            <div class="tab active">홈</div>
-            <div class="tab">소개</div>
-            <div class="tab">활동</div>
-            <div class="tab">뉴스</div>
-            <div class="tab">참여하기</div>
+            <div class="tab active" onclick="scrollToSection('home')">홈</div>
+            <div class="tab" onclick="scrollToSection('intro')">소개</div>
+            <div class="tab" onclick="scrollToSection('activities')">활동</div>
+            <div class="tab" onclick="scrollToSection('news')">뉴스</div>
+            <div class="tab" onclick="scrollToSection('join')">참여하기</div>
         </div>
 
         <div class="callout">
@@ -237,7 +289,7 @@
             </div>
         </div>
 
-        <section class="section">
+        <section class="section" id="news">
             <h2 class="section-title">📰 최신 소식</h2>
             
             <div class="card">
@@ -281,7 +333,7 @@
             </div>
         </section>
 
-        <section class="section">
+        <section class="section" id="intro">
             <h2 class="section-title">🎯 우리의 목표</h2>
             
             <div class="grid">
@@ -300,7 +352,7 @@
             </div>
         </section>
 
-        <section class="section">
+        <section class="section" id="activities">
             <h2 class="section-title">✨ 주요 활동</h2>
             
             <div class="card">
@@ -348,7 +400,7 @@
             </div>
         </section>
 
-        <section class="section">
+        <section class="section" id="join">
             <h2 class="section-title">🌟 함께하기</h2>
             
             <div class="callout">
