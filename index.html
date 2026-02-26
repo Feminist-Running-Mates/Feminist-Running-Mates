@@ -1,473 +1,756 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>다시 뛰는 여성정치 (다뛰여)</title>
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>다뛰여 — 다시 뛰는 여성 정치</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700;900&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --lime: #C8F135;
+    --orange: #FF6B2B;
+    --teal: #00C9A7;
+    --navy: #0D1B2A;
+    --sky: #63D7F5;
+    --yellow: #FFE156;
+    --white: #FAFAFA;
+    --gray: #8892A4;
+    --light: #F2F5F0;
+  }
 
-        body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Noto Sans KR', sans-serif;
-            background: #ffffff;
-            color: #37352f;
-            line-height: 1.6;
-        }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
 
-        .container {
-            max-width: 900px;
-            margin: 0 auto;
-            padding: 60px 40px;
-        }
+  html { scroll-behavior: smooth; }
 
-        .header {
-            margin-bottom: 48px;
-        }
+  body {
+    font-family: 'Noto Sans KR', sans-serif;
+    background: var(--white);
+    color: var(--navy);
+    overflow-x: hidden;
+  }
 
-        .icon {
-            font-size: 78px;
-            margin-bottom: 16px;
-        }
+  /* ── HEADER ── */
+  header {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1rem 2rem;
+    background: var(--navy);
+    border-bottom: 3px solid var(--lime);
+  }
 
-        h1 {
-            font-size: 40px;
-            font-weight: 700;
-            margin-bottom: 8px;
-            color: #37352f;
-        }
+  .logo {
+    font-family: 'Space Mono', monospace;
+    font-size: 1.3rem;
+    font-weight: 700;
+    color: var(--lime);
+    letter-spacing: -1px;
+  }
 
-        .subtitle {
-            font-size: 16px;
-            color: #787774;
-            margin-bottom: 24px;
-        }
+  nav a {
+    color: var(--white);
+    text-decoration: none;
+    font-size: 0.85rem;
+    font-weight: 500;
+    margin-left: 1.5rem;
+    opacity: 0.8;
+    transition: opacity 0.2s, color 0.2s;
+  }
+  nav a:hover { opacity: 1; color: var(--lime); }
 
-        .nav-tabs {
-            display: flex;
-            gap: 8px;
-            margin-bottom: 32px;
-            border-bottom: 1px solid #e9e9e7;
-            padding-bottom: 8px;
-        }
+  /* ── HERO ── */
+  #hero {
+    min-height: 100vh;
+    background: var(--navy);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 6rem 2rem 4rem;
+    position: relative;
+    overflow: hidden;
+  }
 
-        .tab {
-            padding: 6px 12px;
-            border-radius: 4px;
-            cursor: pointer;
-            font-size: 14px;
-            color: #787774;
-            transition: background 0.2s;
-        }
+  .hero-bg-circles {
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    pointer-events: none;
+    overflow: hidden;
+  }
+  .hero-bg-circles span {
+    position: absolute;
+    border-radius: 50%;
+    opacity: 0.12;
+    animation: float 8s ease-in-out infinite;
+  }
+  .c1 { width: 500px; height: 500px; background: var(--teal); top: -150px; right: -100px; animation-delay: 0s; }
+  .c2 { width: 300px; height: 300px; background: var(--lime); bottom: 50px; left: -80px; animation-delay: 2s; }
+  .c3 { width: 200px; height: 200px; background: var(--sky); top: 40%; left: 30%; animation-delay: 4s; }
 
-        .tab:hover {
-            background: #f7f6f3;
-        }
+  @keyframes float {
+    0%, 100% { transform: translateY(0px); }
+    50% { transform: translateY(-30px); }
+  }
 
-        .tab.active {
-            background: #e9e9e7;
-            color: #37352f;
-        }
+  .hero-inner { max-width: 900px; margin: 0 auto; width: 100%; position: relative; z-index: 2; }
 
-        .section {
-            margin-bottom: 48px;
-        }
+  .hero-tag {
+    display: inline-block;
+    background: var(--lime);
+    color: var(--navy);
+    font-size: 0.75rem;
+    font-weight: 700;
+    padding: 0.3rem 0.9rem;
+    border-radius: 999px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    margin-bottom: 1.5rem;
+    animation: slideUp 0.8s ease both;
+  }
 
-        .section-title {
-            font-size: 24px;
-            font-weight: 600;
-            margin-bottom: 16px;
-            color: #37352f;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
+  .hero-title {
+    font-size: clamp(3.5rem, 10vw, 8rem);
+    font-weight: 900;
+    line-height: 0.9;
+    color: var(--white);
+    letter-spacing: -3px;
+    margin-bottom: 1rem;
+    animation: slideUp 0.8s ease 0.1s both;
+  }
+  .hero-title em {
+    font-style: normal;
+    color: var(--lime);
+  }
 
-        .card {
-            background: #ffffff;
-            border: 1px solid #e9e9e7;
-            border-radius: 8px;
-            padding: 24px;
-            margin-bottom: 16px;
-            transition: box-shadow 0.2s, transform 0.2s;
-            cursor: pointer;
-        }
+  .hero-sub {
+    font-size: clamp(1rem, 2.5vw, 1.4rem);
+    color: rgba(250,250,250,0.65);
+    font-weight: 300;
+    max-width: 560px;
+    line-height: 1.7;
+    margin-bottom: 2.5rem;
+    animation: slideUp 0.8s ease 0.2s both;
+  }
 
-        .card:hover {
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
-            transform: translateY(-2px);
-        }
+  .hero-cta {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.6rem;
+    background: var(--lime);
+    color: var(--navy);
+    padding: 0.9rem 2rem;
+    border-radius: 999px;
+    font-weight: 700;
+    font-size: 1rem;
+    text-decoration: none;
+    transition: transform 0.2s, box-shadow 0.2s;
+    animation: slideUp 0.8s ease 0.3s both;
+  }
+  .hero-cta:hover { transform: translateY(-3px); box-shadow: 0 12px 30px rgba(200,241,53,0.35); }
+  .hero-cta .arrow { transition: transform 0.2s; }
+  .hero-cta:hover .arrow { transform: translateX(4px); }
 
-        .card-header {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            margin-bottom: 12px;
-        }
+  .hero-stats {
+    display: flex;
+    gap: 2rem;
+    margin-top: 3rem;
+    animation: slideUp 0.8s ease 0.4s both;
+  }
+  .hero-stats div { text-align: left; }
+  .hero-stats .num {
+    font-family: 'Space Mono', monospace;
+    font-size: 2rem;
+    font-weight: 700;
+    color: var(--teal);
+  }
+  .hero-stats .lbl {
+    font-size: 0.8rem;
+    color: rgba(250,250,250,0.5);
+    margin-top: 0.2rem;
+  }
 
-        .card-icon {
-            font-size: 24px;
-        }
+  @keyframes slideUp {
+    from { opacity: 0; transform: translateY(30px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
 
-        .card-title {
-            font-size: 18px;
-            font-weight: 600;
-            color: #37352f;
-        }
+  /* ── SECTIONS ── */
+  section { padding: 5rem 2rem; }
+  .inner { max-width: 960px; margin: 0 auto; }
 
-        .card-meta {
-            font-size: 13px;
-            color: #9b9a97;
-            margin-bottom: 8px;
-        }
+  .section-label {
+    font-family: 'Space Mono', monospace;
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--orange);
+    margin-bottom: 0.6rem;
+  }
+  .section-title {
+    font-size: clamp(1.8rem, 4vw, 2.8rem);
+    font-weight: 900;
+    line-height: 1.1;
+    letter-spacing: -1.5px;
+    margin-bottom: 2.5rem;
+  }
 
-        .card-content {
-            font-size: 15px;
-            color: #37352f;
-            line-height: 1.6;
-        }
+  /* ── ABOUT ── */
+  #about { background: var(--light); }
 
-        .tag {
-            display: inline-block;
-            padding: 2px 8px;
-            background: #f1f0ef;
-            border-radius: 4px;
-            font-size: 12px;
-            color: #787774;
-            margin-right: 6px;
-            margin-top: 8px;
-        }
+  .about-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.5rem;
+  }
 
-        .callout {
-            display: flex;
-            gap: 12px;
-            padding: 16px;
-            background: #f7f6f3;
-            border-radius: 8px;
-            margin-bottom: 16px;
-        }
+  .about-card {
+    background: var(--white);
+    border-radius: 20px;
+    padding: 2rem;
+    border: 2px solid transparent;
+    transition: border-color 0.3s, transform 0.3s;
+    position: relative;
+    overflow: hidden;
+  }
+  .about-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%; height: 4px;
+  }
+  .about-card.teal::before { background: var(--teal); }
+  .about-card.orange::before { background: var(--orange); }
+  .about-card:hover { border-color: var(--lime); transform: translateY(-4px); }
 
-        .callout-icon {
-            font-size: 24px;
-            flex-shrink: 0;
-        }
+  .about-card-icon { font-size: 2rem; margin-bottom: 1rem; }
+  .about-card h3 {
+    font-size: 1.1rem;
+    font-weight: 700;
+    margin-bottom: 0.8rem;
+  }
+  .about-card p, .about-card li {
+    font-size: 0.95rem;
+    color: #444;
+    line-height: 1.8;
+  }
+  .about-card ul { list-style: none; }
+  .about-card ul li::before { content: "→ "; color: var(--teal); font-weight: 700; }
 
-        .callout-content {
-            font-size: 14px;
-            color: #37352f;
-        }
+  /* ── ACTIVITIES ── */
+  #activities { background: var(--navy); }
+  #activities .section-title { color: var(--white); }
+  #activities .section-label { color: var(--sky); }
 
-        .grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 16px;
-            margin-bottom: 24px;
-        }
+  .timeline { position: relative; }
+  .timeline::before {
+    content: '';
+    position: absolute;
+    left: 18px;
+    top: 0; bottom: 0;
+    width: 2px;
+    background: linear-gradient(to bottom, var(--lime), var(--teal), var(--sky));
+  }
 
-        .info-box {
-            padding: 20px;
-            background: #fbfbfa;
-            border: 1px solid #e9e9e7;
-            border-radius: 8px;
-        }
+  .timeline-item {
+    display: flex;
+    gap: 2rem;
+    margin-bottom: 2rem;
+    position: relative;
+  }
+  .tl-dot {
+    flex-shrink: 0;
+    width: 38px; height: 38px;
+    border-radius: 50%;
+    background: var(--navy);
+    border: 3px solid var(--lime);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1rem;
+    z-index: 1;
+    transition: background 0.3s;
+  }
+  .timeline-item:hover .tl-dot { background: var(--lime); }
 
-        .info-box h3 {
-            font-size: 16px;
-            font-weight: 600;
-            margin-bottom: 8px;
-            color: #37352f;
-        }
+  .tl-content {
+    background: rgba(255,255,255,0.05);
+    border: 1px solid rgba(255,255,255,0.1);
+    border-radius: 16px;
+    padding: 1.2rem 1.5rem;
+    flex: 1;
+    transition: background 0.3s, border-color 0.3s;
+    cursor: pointer;
+  }
+  .tl-content:hover {
+    background: rgba(255,255,255,0.08);
+    border-color: rgba(200,241,53,0.4);
+  }
 
-        .info-box p {
-            font-size: 14px;
-            color: #787774;
-        }
+  .tl-date {
+    font-family: 'Space Mono', monospace;
+    font-size: 0.75rem;
+    color: var(--teal);
+    font-weight: 700;
+    margin-bottom: 0.4rem;
+    letter-spacing: 0.05em;
+  }
+  .tl-title {
+    font-size: 1rem;
+    font-weight: 700;
+    color: var(--white);
+    line-height: 1.5;
+  }
+  .tl-desc {
+    font-size: 0.88rem;
+    color: rgba(255,255,255,0.55);
+    margin-top: 0.5rem;
+    line-height: 1.7;
+    display: none;
+  }
+  .tl-content.open .tl-desc { display: block; }
+  .tl-toggle {
+    float: right;
+    font-family: 'Space Mono', monospace;
+    color: var(--lime);
+    font-size: 1.1rem;
+    font-weight: 700;
+    margin-left: 0.5rem;
+    transition: transform 0.3s;
+  }
+  .tl-content.open .tl-toggle { transform: rotate(45deg); }
 
-        .quote {
-            border-left: 4px solid #37352f;
-            padding-left: 16px;
-            margin: 24px 0;
-            font-size: 16px;
-            font-style: italic;
-            color: #37352f;
-        }
+  /* ── VOICES ── */
+  #voices { background: var(--white); }
 
-        .footer {
-            margin-top: 64px;
-            padding-top: 24px;
-            border-top: 1px solid #e9e9e7;
-            text-align: center;
-            color: #9b9a97;
-            font-size: 13px;
-        }
+  .voices-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+    gap: 1rem;
+  }
 
-        a {
-            color: #2383e2;
-            text-decoration: none;
-        }
+  .voice-card {
+    background: var(--light);
+    border-radius: 16px;
+    padding: 1.5rem;
+    border-left: 4px solid transparent;
+    transition: transform 0.3s, border-color 0.3s;
+    position: relative;
+  }
+  .voice-card:nth-child(3n+1) { border-color: var(--teal); }
+  .voice-card:nth-child(3n+2) { border-color: var(--orange); }
+  .voice-card:nth-child(3n+3) { border-color: var(--sky); }
+  .voice-card:hover { transform: translateY(-4px); }
 
-        a:hover {
-            text-decoration: underline;
-        }
+  .voice-quote {
+    font-size: 2rem;
+    color: var(--lime);
+    line-height: 1;
+    margin-bottom: 0.5rem;
+    font-family: 'Space Mono', monospace;
+  }
+  .voice-text {
+    font-size: 0.95rem;
+    color: #333;
+    line-height: 1.8;
+    font-weight: 400;
+  }
 
-        html {
-            scroll-behavior: smooth;
-        }
-    </style>
-    <script>
-        function scrollToSection(sectionId) {
-            const element = document.getElementById(sectionId);
-            if (element) {
-                element.scrollIntoView({ behavior: 'smooth', block: 'start' });
-                
-                // Update active tab
-                document.querySelectorAll('.tab').forEach(tab => {
-                    tab.classList.remove('active');
-                });
-                event.target.classList.add('active');
-            }
-        }
+  /* ── NEWS ── */
+  #news { background: var(--light); }
 
-        // Highlight active tab based on scroll position
-        window.addEventListener('scroll', function() {
-            const sections = ['home', 'news', 'intro', 'activities', 'join'];
-            const tabs = document.querySelectorAll('.tab');
-            
-            let currentSection = 'home';
-            
-            sections.forEach(sectionId => {
-                const element = document.getElementById(sectionId);
-                if (element) {
-                    const rect = element.getBoundingClientRect();
-                    if (rect.top <= 150 && rect.bottom >= 150) {
-                        currentSection = sectionId;
-                    }
-                }
-            });
-            
-            // Map section IDs to tab indices
-            const sectionToTab = {
-                'home': 0,
-                'intro': 1,
-                'activities': 2,
-                'news': 3,
-                'join': 4
-            };
-            
-            tabs.forEach((tab, index) => {
-                tab.classList.remove('active');
-                if (sectionToTab[currentSection] === index) {
-                    tab.classList.add('active');
-                }
-            });
-        });
-    </script>
+  .news-list {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+  }
+
+  .news-card {
+    background: var(--white);
+    border-radius: 16px;
+    padding: 1.5rem;
+    text-decoration: none;
+    color: inherit;
+    border: 2px solid transparent;
+    transition: border-color 0.3s, transform 0.3s;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+  .news-card:hover { border-color: var(--teal); transform: translateY(-3px); }
+
+  .news-source {
+    font-family: 'Space Mono', monospace;
+    font-size: 0.72rem;
+    color: var(--orange);
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+  }
+  .news-date {
+    font-size: 0.78rem;
+    color: var(--gray);
+  }
+  .news-title {
+    font-size: 0.95rem;
+    font-weight: 700;
+    color: var(--navy);
+    line-height: 1.5;
+  }
+  .news-arrow {
+    margin-top: auto;
+    font-size: 1.2rem;
+    color: var(--teal);
+    font-family: 'Space Mono', monospace;
+    align-self: flex-end;
+  }
+
+  /* ── JOIN ── */
+  #join {
+    background: var(--navy);
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+  #join::before {
+    content: '';
+    position: absolute;
+    width: 600px; height: 600px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(0,201,167,0.15) 0%, transparent 70%);
+    top: 50%; left: 50%;
+    transform: translate(-50%, -50%);
+  }
+  #join .section-title { color: var(--white); }
+  #join .section-label { color: var(--teal); }
+
+  .join-lead {
+    font-size: 1.1rem;
+    color: rgba(255,255,255,0.6);
+    margin-bottom: 3rem;
+    font-weight: 300;
+    line-height: 1.8;
+    position: relative;
+    z-index: 1;
+  }
+
+  .join-cards {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.5rem;
+    max-width: 640px;
+    margin: 0 auto 2.5rem;
+    position: relative;
+    z-index: 1;
+  }
+
+  .join-card {
+    background: rgba(255,255,255,0.06);
+    border: 2px solid rgba(255,255,255,0.1);
+    border-radius: 20px;
+    padding: 2rem 1.5rem;
+    transition: border-color 0.3s, background 0.3s;
+  }
+  .join-card:hover { border-color: var(--lime); background: rgba(255,255,255,0.09); }
+  .join-card .icon { font-size: 2rem; margin-bottom: 0.8rem; }
+  .join-card h3 {
+    font-size: 1rem;
+    font-weight: 700;
+    color: var(--white);
+    margin-bottom: 0.6rem;
+  }
+  .join-card p {
+    font-size: 0.88rem;
+    color: rgba(255,255,255,0.5);
+    line-height: 1.7;
+  }
+  .join-card a { color: var(--sky); text-decoration: none; }
+  .join-card a:hover { text-decoration: underline; }
+
+  .join-cta-big {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.7rem;
+    background: var(--lime);
+    color: var(--navy);
+    padding: 1.1rem 2.5rem;
+    border-radius: 999px;
+    font-weight: 900;
+    font-size: 1.1rem;
+    text-decoration: none;
+    position: relative; z-index: 1;
+    transition: transform 0.2s, box-shadow 0.2s;
+  }
+  .join-cta-big:hover { transform: scale(1.04); box-shadow: 0 16px 40px rgba(200,241,53,0.3); }
+
+  /* ── FOOTER ── */
+  footer {
+    background: #060E18;
+    padding: 2rem;
+    text-align: center;
+    color: rgba(255,255,255,0.3);
+    font-size: 0.8rem;
+    font-family: 'Space Mono', monospace;
+  }
+
+  /* ── MOBILE ── */
+  @media (max-width: 700px) {
+    header { padding: 0.9rem 1.2rem; }
+    .logo { font-size: 1.1rem; }
+    nav { display: none; }
+    section { padding: 3.5rem 1.2rem; }
+    .hero-stats { gap: 1.5rem; flex-wrap: wrap; }
+    .about-grid { grid-template-columns: 1fr; }
+    .news-list { grid-template-columns: 1fr; }
+    .join-cards { grid-template-columns: 1fr; }
+    .timeline::before { left: 14px; }
+    .tl-dot { width: 30px; height: 30px; font-size: 0.85rem; }
+    .timeline-item { gap: 1.2rem; }
+  }
+</style>
 </head>
 <body>
-    <div class="container">
-        <div class="header" id="home">
-            <div class="icon">🏃‍♀️</div>
-            <h1>다시 뛰는 여성정치</h1>
-            <div class="subtitle">더 나은 정치를 위한 여성들의 연대와 도전</div>
-        </div>
 
-        <div class="nav-tabs">
-            <div class="tab active" onclick="scrollToSection('home')">홈</div>
-            <div class="tab" onclick="scrollToSection('intro')">소개</div>
-            <div class="tab" onclick="scrollToSection('activities')">활동</div>
-            <div class="tab" onclick="scrollToSection('news')">뉴스</div>
-            <div class="tab" onclick="scrollToSection('join')">참여하기</div>
-        </div>
+<!-- HEADER -->
+<header>
+  <div class="logo">다뛰여</div>
+  <nav>
+    <a href="#about">소개</a>
+    <a href="#activities">활동</a>
+    <a href="#voices">후기</a>
+    <a href="#news">뉴스</a>
+    <a href="#join">함께하기</a>
+  </nav>
+</header>
 
-        <div class="callout">
-            <div class="callout-icon">💡</div>
-            <div class="callout-content">
-                <strong>다뛰여란?</strong> '다시 뛰는 여성정치'의 줄임말로, 한국 정치에서 여성의 목소리를 높이고 실질적인 성평등 정치를 실현하기 위한 시민 운동입니다.
-            </div>
-        </div>
-
-        <section class="section" id="news">
-            <h2 class="section-title">📰 최신 소식</h2>
-            
-            <a href="https://www.sisain.co.kr/news/articleView.html?idxno=55192" target="_blank" style="text-decoration: none; color: inherit;">
-                <div class="card">
-                    <div class="card-header">
-                        <div class="card-icon">🏃‍♀️</div>
-                        <div class="card-title">여성 정치, 다시 합니다</div>
-                    </div>
-                    <div class="card-meta">2025년 3월 19일 · 시사IN</div>
-                    <div class="card-content">
-                        달리기 모임 '다시 뛰는 여성 정치'(다뛰여)는 매주 일요일 오후 3시 서울 마포구 상암동 하늘공원에서 50명 남짓의 회원들이 모여 달립니다. 5월 3일 여성 마라톤 대회에 100명이 함께 출전해 10km를 달리는 것이 목표입니다. "광장을 빛낸 응원봉의 여성 정치는 모든 여성과 모든 시민을 위한 의사봉의 성평등 정치로 이어져야 한다"는 메시지를 담고 있습니다.
-                    </div>
-                    <div class="tag">다뛰여</div>
-                    <div class="tag">러닝크루</div>
-                    <div class="tag">여성정치</div>
-                </div>
-            </a>
-
-            <a href="https://www.womennews.co.kr/news/articleView.html?idxno=260396" target="_blank" style="text-decoration: none; color: inherit;">
-                <div class="card">
-                    <div class="card-header">
-                        <div class="card-icon">🎤</div>
-                        <div class="card-title">'3.8여성 1만인 선언' 만든 러닝크루… "여성정치? 달리면서 말하자"</div>
-                    </div>
-                    <div class="card-meta">2025년 4월 10일 · 여성신문</div>
-                    <div class="card-content">
-                        지난해 10월 만들어진 '다뛰여'는 장혜영 전 정의당 의원, 박지현 전 더불어민주당 비상대책위원장, 권김현영 여성현실연구소장이 여성 정치세력화의 필요성을 느끼고 시작한 러닝크루입니다. "지금은 몸으로 엮이는 시간이 필요했다"는 권김현영 소장의 제안으로 탄생했으며, 3월 8일 세계 여성의 날에는 '내란 극복과 민주주의 회복을 위한 3.8 여성 1만인 선언'을 발표하기도 했습니다.
-                    </div>
-                    <div class="tag">3.8선언</div>
-                    <div class="tag">페미니스트</div>
-                </div>
-            </a>
-
-            <a href="https://www.womennews.co.kr/news/articleView.html?idxno=270554" target="_blank" style="text-decoration: none; color: inherit;">
-                <div class="card">
-                    <div class="card-header">
-                        <div class="card-icon">📊</div>
-                        <div class="card-title">성평등부 출범부터 최말자 무죄까지… 2025 '여성정치 10대 뉴스'</div>
-                    </div>
-                    <div class="card-meta">2025년 12월 5일 · 여성신문</div>
-                    <div class="card-content">
-                        '다시 뛰는 여성 정치'(다뛰여)가 선정한 '2025 여성정치 10대 뉴스'에는 남태령 대첩, 윤석열 전 대통령 탄핵, 성평등가족부 출범, 최말자 무죄 판결 등이 포함되었습니다. 장혜영 전 정의당 의원 등 약 150여명의 페미니스트들이 모인 다뛰여는 "2025년은 여성들이 광장에서 민주주의의 역사를 다시 쓴 해"라고 평가했습니다.
-                    </div>
-                    <div class="tag">10대뉴스</div>
-                    <div class="tag">여성정치</div>
-                </div>
-            </a>
-        </section>
-
-        <section class="section" id="intro">
-            <h2 class="section-title">🎯 우리의 목표</h2>
-            
-            <div class="grid">
-                <div class="info-box">
-                    <h3>🗳️ 여성 정치 대표성 확대</h3>
-                    <p>국회, 지방의회, 정당 내 여성 비율을 40% 이상으로 높이기 위한 제도 개선과 정치 참여 독려</p>
-                </div>
-                <div class="info-box">
-                    <h3>💪 리더십 역량 강화</h3>
-                    <p>예비 여성 정치인을 위한 교육 프로그램, 멘토링, 네트워킹 기회 제공</p>
-                </div>
-                <div class="info-box">
-                    <h3>📣 정책 개발 및 옹호</h3>
-                    <p>성평등 정책, 여성 인권, 일·생활 균형 등 실질적 정책 아젠다 개발 및 입법 촉구</p>
-                </div>
-            </div>
-        </section>
-
-        <section class="section" id="activities">
-            <h2 class="section-title">✨ 주요 활동</h2>
-            
-            <div class="card">
-                <div class="card-header">
-                    <div class="card-icon">🎓</div>
-                    <div class="card-title">정치 리더십 아카데미</div>
-                </div>
-                <div class="card-content">
-                    정치에 관심 있는 여성들을 대상으로 정책 기획, 선거 전략, 미디어 트레이닝, 자금 조달 등 실전 정치 교육을 제공합니다. 3개월 과정으로 운영되며, 수료 후 멘토링 프로그램과 연결됩니다.
-                </div>
-            </div>
-
-            <div class="card">
-                <div class="card-header">
-                    <div class="card-icon">🤝</div>
-                    <div class="card-title">여성 정치인 네트워크</div>
-                </div>
-                <div class="card-content">
-                    현직 및 예비 여성 정치인들이 경험을 나누고 협력할 수 있는 네트워킹 플랫폼을 운영합니다. 정기 모임, 온라인 커뮤니티, 정책 스터디 그룹 등을 통해 상호 지원 체계를 구축합니다.
-                </div>
-            </div>
-
-            <div class="card">
-                <div class="card-header">
-                    <div class="card-icon">📢</div>
-                    <div class="card-title">정책 캠페인</div>
-                </div>
-                <div class="card-content">
-                    성별 할당제 강화, 정치자금법 개정, 여성 폭력 근절, 돌봄 정책 개선 등 구체적인 입법 과제를 설정하고 시민들과 함께하는 캠페인을 전개합니다.
-                </div>
-            </div>
-        </section>
-
-        <section class="section">
-            <h2 class="section-title">💬 생생한 목소리</h2>
-            
-            <div class="quote">
-                "다뛰여의 멘토링 프로그램 덕분에 막연했던 정치 참여가 구체적인 목표가 되었습니다. 지금은 지역구에서 청년 정책 활동가로 활동하며 내년 지방선거 출마를 준비하고 있어요."<br>
-                — 김민지, 32세, 멘토링 프로그램 수료생
-            </div>
-
-            <div class="quote">
-                "여성 정치인으로서 겪는 어려움을 함께 나눌 수 있는 동료들을 만난 것이 큰 힘이 됩니다. 다뛰여는 단순한 단체가 아니라 우리의 안전망이자 성장의 발판입니다."<br>
-                — 이수진 구의원, 서울 강남구
-            </div>
-        </section>
-
-        <section class="section" id="join">
-            <h2 class="section-title">🌟 함께하기</h2>
-            
-            <div class="callout">
-                <div class="callout-icon">✉️</div>
-                <div class="callout-content">
-                    <strong>참여 방법</strong><br>
-                    · 정치 리더십 아카데미 지원: <a href="mailto:academy@datwiyeo.org">academy@datwiyeo.org</a><br>
-                    · 멘토링 프로그램 신청: <a href="mailto:mentoring@datwiyeo.org">mentoring@datwiyeo.org</a><br>
-                    · 자원봉사 및 후원 문의: <a href="mailto:info@datwiyeo.org">info@datwiyeo.org</a><br>
-                    · 일반 문의: <a href="mailto:contact@datwiyeo.org">contact@datwiyeo.org</a>
-                </div>
-            </div>
-
-            <div class="grid">
-                <div class="info-box">
-                    <h3>📱 소셜 미디어</h3>
-                    <p>
-                        Instagram: @datwiyeo<br>
-                        Twitter: @datwiyeo_kr<br>
-                        Facebook: 다시뛰는여성정치
-                    </p>
-                </div>
-                <div class="info-box">
-                    <h3>🏢 오프라인 모임</h3>
-                    <p>
-                        매월 첫째 주 토요일<br>
-                        정책 스터디 & 네트워킹<br>
-                        서울 종로구 소재
-                    </p>
-                </div>
-            </div>
-        </section>
-
-        <section class="section">
-            <h2 class="section-title">📚 관련 자료</h2>
-            
-            <div class="card">
-                <div class="card-header">
-                    <div class="card-icon">📄</div>
-                    <div class="card-title">한국 여성 정치 백서 2025</div>
-                </div>
-                <div class="card-content">
-                    여성 정치 대표성 현황, 장애 요인 분석, 해외 사례 연구, 정책 제안을 담은 종합 보고서 (PDF, 120쪽)
-                </div>
-            </div>
-
-            <div class="card">
-                <div class="card-header">
-                    <div class="card-icon">🎥</div>
-                    <div class="card-title">다큐멘터리: 그녀들의 정치</div>
-                </div>
-                <div class="card-content">
-                    정치에 도전하는 여성들의 이야기를 담은 30분 분량의 다큐멘터리 영상
-                </div>
-            </div>
-        </section>
-
-        <div class="footer">
-            <p>© 2026 다시 뛰는 여성정치 (다뛰여) · 모든 권리 보유</p>
-            <p>더 나은 정치, 더 평등한 사회를 위해</p>
-        </div>
+<!-- HERO -->
+<section id="hero">
+  <div class="hero-bg-circles">
+    <span class="c1"></span>
+    <span class="c2"></span>
+    <span class="c3"></span>
+  </div>
+  <div class="hero-inner">
+    <div class="hero-tag">🎽 Feminist Running Crew</div>
+    <h1 class="hero-title">다시<br><em>뛰는</em><br>여성정치</h1>
+    <p class="hero-sub">몸으로 만나고, 함께 달리고, 말이 통하는<br>페미니스트 정치 친구를 만들어가는 러닝 크루</p>
+    <div class="hero-stats">
+      <div><div class="num">47<span style="font-size:1rem">+</span></div><div class="lbl">정기런 개최</div></div>
+      <div><div class="num">5.8<span style="font-size:1rem">km</span></div><div class="lbl">매주 일요일</div></div>
+      <div><div class="num">'24<span style="font-size:1rem">.10</span></div><div class="lbl">창립</div></div>
     </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="inner">
+    <div class="section-label">About Us</div>
+    <h2 class="section-title">다뛰여란?</h2>
+    <div class="about-grid">
+      <div class="about-card teal">
+        <div class="about-card-icon">🏃‍♀️</div>
+        <h3>우리의 지향</h3>
+        <ul>
+          <li>다시 뛰는 여성 정치를 염원하고 응원하는 크루</li>
+          <li>몸으로 만나서 함께 달리고 시간과 얼굴의 기억을 쌓는 모임</li>
+          <li>말이 통하는 페미니스트 정치 친구를 만들어가는 모임</li>
+        </ul>
+      </div>
+      <div class="about-card orange">
+        <div class="about-card-icon">⚙️</div>
+        <h3>운영</h3>
+        <ul>
+          <li>매주 일요일 오후: 정기런 5.8km 및 슬로우러닝 3km</li>
+          <li>토요 LSD 커피런, 금요 인터벌, 홍제천 빵런, 한강 야간런 등 다양한 러닝 라이프</li>
+          <li>단체카톡방 공지에 '참석합니다' 투표로 참석 — 초보 런너 대환영!</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ACTIVITIES -->
+<section id="activities">
+  <div class="inner">
+    <div class="section-label">Activities</div>
+    <h2 class="section-title" style="color:var(--white)">주요 활동</h2>
+    <div class="timeline">
+
+      <div class="timeline-item">
+        <div class="tl-dot">🗓</div>
+        <div class="tl-content" onclick="this.classList.toggle('open')">
+          <span class="tl-toggle">+</span>
+          <div class="tl-date">2026. 03. 07 (예정)</div>
+          <div class="tl-title">제41회 한국여성대회 부스 참가</div>
+          <div class="tl-desc">
+            "말이 통하는 러닝메이트, 내 표가 통하는 페미니스트 정치"<br>
+            페미니스트 정치+러닝 친구를 만날 수 있는 만남의 장으로 다뛰여 소개
+          </div>
+        </div>
+      </div>
+
+      <div class="timeline-item">
+        <div class="tl-dot">📰</div>
+        <div class="tl-content" onclick="this.classList.toggle('open')">
+          <span class="tl-toggle">+</span>
+          <div class="tl-date">2025. 11. 30</div>
+          <div class="tl-title">다뛰여가 뽑은 올해의 여성정치 10대 뉴스</div>
+          <div class="tl-desc">
+            2025년에 있었던 여성정치 뉴스를 모아 중요도에 따라 총 10개의 뉴스를 선정했습니다.
+          </div>
+        </div>
+      </div>
+
+      <div class="timeline-item">
+        <div class="tl-dot">🎉</div>
+        <div class="tl-content" onclick="this.classList.toggle('open')">
+          <span class="tl-toggle">+</span>
+          <div class="tl-date">2025. 10. 19</div>
+          <div class="tl-title">다뛰여 1주년 기념런 앤 파티</div>
+          <div class="tl-desc">
+            정기런 장소에서 미니 운동회, 페미 러너를 위한 바자회 및 파티, 1주년 기념 토크를 진행했습니다.
+          </div>
+        </div>
+      </div>
+
+      <div class="timeline-item">
+        <div class="tl-dot">🏅</div>
+        <div class="tl-content" onclick="this.classList.toggle('open')">
+          <span class="tl-toggle">+</span>
+          <div class="tl-date">2025. 05. 03</div>
+          <div class="tl-title">제25회 여성마라톤 참가 및 완주</div>
+          <div class="tl-desc">
+            상암 평화의공원 평화광장에서 열린 제25회 여성마라톤에 다뛰여 크루들이 참가해 완주했습니다.
+          </div>
+        </div>
+      </div>
+
+      <div class="timeline-item">
+        <div class="tl-dot">🏃</div>
+        <div class="tl-content" onclick="this.classList.toggle('open')">
+          <span class="tl-toggle">+</span>
+          <div class="tl-date">2025. 04. 06</div>
+          <div class="tl-title">윤석열 전 대통령 파면런 11.22km</div>
+          <div class="tl-desc">
+            헌법재판소가 파면을 결정한 시각인 오전 11시 22분을 기념해 11.22km를 함께 달렸습니다.
+          </div>
+        </div>
+      </div>
+
+      <div class="timeline-item">
+        <div class="tl-dot">✊</div>
+        <div class="tl-content" onclick="this.classList.toggle('open')">
+          <span class="tl-toggle">+</span>
+          <div class="tl-date">2025. 03. 08</div>
+          <div class="tl-title">3.8 여성1만인 선언 조직 "응원봉을 의사봉으로!"</div>
+          <div class="tl-desc">
+            내란 극복과 민주주의 회복을 위한 1만인 서명을 받아 제40회 한국여성대회에서 선언문을 낭독했습니다.
+          </div>
+        </div>
+      </div>
+
+      <div class="timeline-item">
+        <div class="tl-dot">🌱</div>
+        <div class="tl-content" onclick="this.classList.toggle('open')">
+          <span class="tl-toggle">+</span>
+          <div class="tl-date">2024. 10. 20</div>
+          <div class="tl-title">다뛰여 창립 및 첫 러닝 시작</div>
+          <div class="tl-desc">
+            창립자: 권김현영, 장혜영, 박지현
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- VOICES -->
+<section id="voices">
+  <div class="inner">
+    <div class="section-label">Member Voices</div>
+    <h2 class="section-title">멤버들의 한 마디</h2>
+    <p style="color: var(--gray); margin-bottom: 2rem; font-size: 0.95rem; font-style: italic;">다뛰여를 하면서 내게 달라진 점이 있다면?</p>
+    <div class="voices-grid">
+      <div class="voice-card"><div class="voice-quote">"</div><p class="voice-text">달릴 수 있게 되었다. 길게 뛸 수 있게 되었다. 내 생애 최고의 업적… 내가 뛸 수 있다니!</p></div>
+      <div class="voice-card"><div class="voice-quote">"</div><p class="voice-text">'굳이' 시간내어 달리러 가게 되었다. 몸이 원하는 스트레칭이 무엇인지 인지할 수 있게 되었다.</p></div>
+      <div class="voice-card"><div class="voice-quote">"</div><p class="voice-text">남자들의 운동모임에 대한 편견은 줄고, 여자들의 운동모임의 필요성을 확인했다.</p></div>
+      <div class="voice-card"><div class="voice-quote">"</div><p class="voice-text">함께 뛰는 즐거움, 다른 계절에 뛰는 즐거움을 알게 되었다.</p></div>
+      <div class="voice-card"><div class="voice-quote">"</div><p class="voice-text">달리기 큰물 & 페미니스트 세계에 연결된 느낌</p></div>
+      <div class="voice-card"><div class="voice-quote">"</div><p class="voice-text">정치적 이슈가 있을 때마다 다뛰여 단톡방을 읽어본다.</p></div>
+      <div class="voice-card"><div class="voice-quote">"</div><p class="voice-text">달리기를 오래 계속할 수 있겠다는 자신감이 생겼어요. 여성정치도 그럴 수 있겠다는 희망이 생겨요.</p></div>
+      <div class="voice-card"><div class="voice-quote">"</div><p class="voice-text">사람과 달리기를 더 좋아하게 되었어요. 꾸준히 달릴 수 있게 되었고 좋은 분들을 많이 만났습니다!</p></div>
+      <div class="voice-card"><div class="voice-quote">"</div><p class="voice-text">자연과 내 숨소리가 하나되는 경험, 옆에서 바지런히 함께 뛰는 사람들이 주는 안정감, 이런 느슨한 연대의 힘을 느낍니다.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- NEWS -->
+<section id="news">
+  <div class="inner">
+    <div class="section-label">Press</div>
+    <h2 class="section-title">최신 소식</h2>
+    <div class="news-list">
+      <a class="news-card" href="https://www.hani.co.kr/arti/society/women/1179989.html" target="_blank" rel="noopener">
+        <div class="news-source">한국일보</div>
+        <div class="news-date">2025. 02. 02</div>
+        <div class="news-title">"함께 달리면 더 멀리" 여성 정치 향해 뛰는 페미니스트들</div>
+        <div class="news-arrow">↗</div>
+      </a>
+      <a class="news-card" href="https://www.sisain.co.kr/news/articleView.html?idxno=55192" target="_blank" rel="noopener">
+        <div class="news-source">시사인</div>
+        <div class="news-date">2025. 03. 19</div>
+        <div class="news-title">여성 정치, 다시 합니다 [기자의 프리스타일]</div>
+        <div class="news-arrow">↗</div>
+      </a>
+      <a class="news-card" href="https://www.womennews.co.kr/news/articleView.html?idxno=260396" target="_blank" rel="noopener">
+        <div class="news-source">여성신문</div>
+        <div class="news-date">2025. 04. 10</div>
+        <div class="news-title">'3.8여성 1만인 선언' 만든 러닝크루… "여성정치? 달리면서 말하자"</div>
+        <div class="news-arrow">↗</div>
+      </a>
+      <a class="news-card" href="https://www.womennews.co.kr/news/articleView.html?idxno=270554" target="_blank" rel="noopener">
+        <div class="news-source">여성신문</div>
+        <div class="news-date">2025. 12. 05</div>
+        <div class="news-title">성평등부 출범부터 최말자 무죄까지… 2025 '여성정치 10대 뉴스'</div>
+        <div class="news-arrow">↗</div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- JOIN -->
+<section id="join">
+  <div class="inner">
+    <div class="section-label">Join Us</div>
+    <h2 class="section-title">함께하기</h2>
+    <p class="join-lead">다뛰여의 문은 언제나 열려 있습니다.<br>당신의 발걸음이 내일을 바꿉니다.</p>
+    <div class="join-cards">
+      <div class="join-card">
+        <div class="icon">📱</div>
+        <h3>소셜 미디어</h3>
+        <p>인스타그램 <a href="https://instagram.com" target="_blank">@다뛰여</a>로 DM 주시면 단체카톡방 링크를 보내드립니다.</p>
+      </div>
+      <div class="join-card">
+        <div class="icon">☕</div>
+        <h3>오프라인 모임</h3>
+        <p>매주 일요일 오후<br>서울 마포구 상암동</p>
+      </div>
+    </div>
+    <a href="https://instagram.com" target="_blank" class="join-cta-big">
+      🏃 지금 함께 달리기 →
+    </a>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <p>© 2024–2026 다뛰여 · 다시 뛰는 여성 정치를 응원합니다</p>
+</footer>
+
 </body>
 </html>
